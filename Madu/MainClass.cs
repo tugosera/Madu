@@ -10,17 +10,22 @@ namespace Madu
     {
         static void Main(string[] args)
         {
-            Point p1 = new Point(1, 3, '*');
-            p1.Draw();
 
-            Point p2 = new Point(4, 5, '#');
-            p2.Draw();
+            Console.SetWindowSize(80, 25);
 
-            horizontalLine line = new horizontalLine(5, 10, 8, '+');
-            line.Draw();
+            horizontalLine upline = new horizontalLine(0,78, 0, '-');
+            horizontalLine downline = new horizontalLine(0, 78, 24, '-');
+            VerticalLine leftline = new VerticalLine(0, 24, 0, '|');
+            VerticalLine rightline = new VerticalLine(0, 24, 78, '|');
+            upline.Drow();
+            downline.Drow();
+            leftline.Drow();
+            rightline.Drow();
 
-            VerticalLine Vline = new VerticalLine(8, 13, 5, '+');
-            Vline.Draw();
+            Point p = new Point(1, 3, '*');
+            p.Draw();
+
+            Snake snake = new Snake(p, 4, Direction.Right);
 
 
 
@@ -29,6 +34,11 @@ namespace Madu
 
 
 
+
+
+
+
+            Console.ReadLine();
             /*List<int> numList = new List<int>();
             numList.Add(0);
             numList.Add(1);

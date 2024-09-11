@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    public class VerticalLine
+    class VerticalLine : Figure
     {
-        List<Point> plist;
-
         public VerticalLine(int yBot, int yTop, int x, char sym)
         {
             plist = new List<Point>();
@@ -17,14 +15,6 @@ namespace Madu
             {
                 Point p = new Point(x, y, sym);
                 plist.Add(p);
-            }
-        }
-
-        public void Draw()
-        {
-            foreach (Point p in plist)
-            {
-                p.Draw();
             }
         }
     }
