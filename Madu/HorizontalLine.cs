@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    class horizontalLine: Figure
+    internal class horizontalLine: Figure
     {
 
         public horizontalLine(int xLeft, int xRight, int y, char sym)

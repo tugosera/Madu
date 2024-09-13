@@ -22,14 +22,18 @@ namespace Madu
             leftline.Drow();
             rightline.Drow();
 
-            Point p = new Point(1, 3, '*');
-            p.Draw();
+            Point p = new Point(23, 7, '*');
+            Snake snake = new Snake(p, 5, Direction.Right);
+            snake.Drow();
 
-            Snake snake = new Snake(p, 4, Direction.Right);
-
-
-
-
+            while(true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    if (key.Key == ConsoleKey.LeftArrow) {
+                }
+            }
 
 
 
@@ -39,6 +43,7 @@ namespace Madu
 
 
             Console.ReadLine();
+
             /*List<int> numList = new List<int>();
             numList.Add(0);
             numList.Add(1);

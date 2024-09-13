@@ -6,16 +6,39 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    class Snake: Figure
+    internal class Snake: Figure
     {
+
+        Direction direction;
+
         public Snake(Point tail, int lenght, Direction direction)
         {
+            plist = new List<Point>();
             for (int i = 0; i < lenght; i++)
             {
                 Point p = new Point(tail);
-                p.Move(1, direction);
+                p.Move(i, direction);
                 plist.Add(p);
             }
+        }
+
+        internal void Move()
+        {
+            Point tail = plist.First();
+            plist.Remove(tail);
+            Point head = getNextPoint();
+            plist.Add(head);
+
+            tail.Clear();
+            head.Draw();
+        }
+
+        public Point getNextPoint()
+        {
+            Point head = plist.Last();
+            Point nextPoint = new Point(head);
+            nextPoint.Move(1, direction);
+            return nextPoint;
         }
     }
 }

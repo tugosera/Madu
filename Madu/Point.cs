@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Madu
 {
-    public class Point
+    internal class Point
     {
         public int x;
         public int y;
@@ -30,22 +30,22 @@ namespace Madu
         {
             if (direction == Direction.Right)
             {
-                x += offset;
+                x = x + offset;
             }
 
             else if (direction == Direction.Left)
             {
-                x += offset;
+                x = x - offset;
             }
 
             else if (direction == Direction.Up)
             {
-                y += offset;
+                y = y - offset;
             }
 
             else if (direction == Direction.Down)
             {
-                y -= offset;
+                y = y + offset;
             }
         }
 
@@ -53,6 +53,12 @@ namespace Madu
         {
             Console.SetCursorPosition(x, y);
             Console.Write(sym);
+        }
+
+        public void Clear()
+        {
+            sym = ' ';
+            Draw();
         }
     }
 }
