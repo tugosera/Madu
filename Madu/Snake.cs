@@ -12,6 +12,7 @@ namespace Madu
 
         Direction direction;
         public int gool = 0;
+        public int speed = 100;
 
         public Snake(Point tail, int lenght, Direction direction)
         {
@@ -74,6 +75,53 @@ namespace Madu
                 food.sym = Head.sym;
                 plist.Add(food);
                 gool += 1;
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal bool EatSpeed(Point foodSpeed)
+        {
+            Point Head = getNextPoint();
+            if (Head.IsHit(foodSpeed))
+            {
+                foodSpeed.sym = Head.sym;
+                plist.Add(foodSpeed);
+                gool += 1;
+                speed -=10;
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal bool EatSlow(Point foodSlow)
+        {
+            Point Head = getNextPoint();
+            if (Head.IsHit(foodSlow))
+            {
+                foodSlow.sym = Head.sym;
+                plist.Add(foodSlow);
+                gool += 1;
+                speed += 10;
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal bool EatGG(Point foodGG)
+        {
+            Point Head = getNextPoint();
+            if (Head.IsHit(foodGG))
+            {
+                foodGG.sym = Head.sym;
+                plist.Add(foodGG);
+                
+
                 return true;
             }
             else
