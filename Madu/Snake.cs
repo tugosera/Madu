@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Madu
 {
-    internal class Snake: Figure
+    public class Snake: Figure
     {
 
         Direction direction;
@@ -16,6 +16,7 @@ namespace Madu
 
         public Snake(Point tail, int lenght, Direction direction)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             plist = new List<Point>();
             for (int i = 0; i < lenght; i++)
             {
