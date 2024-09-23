@@ -10,8 +10,7 @@ namespace Madu
     class VerticalLine : Figure
     {
         public VerticalLine(int yBot, int yTop, int x, char sym)
-        {
-            Color slateBlue = Color.FromName("SlateBlue");
+        {   
             plist = new List<Point>();
             for (int y = yBot; y <= yTop; y++)
             {

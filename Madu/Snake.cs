@@ -9,14 +9,14 @@ namespace Madu
 {
     public class Snake: Figure
     {
-
+        Random random = new Random();
+        
         Direction direction;
         public int gool = 0;
         public int speed = 100;
 
         public Snake(Point tail, int lenght, Direction direction)
         {
-            Console.ForegroundColor = ConsoleColor.Blue;
             plist = new List<Point>();
             for (int i = 0; i < lenght; i++)
             {
@@ -122,6 +122,20 @@ namespace Madu
                 foodGG.sym = Head.sym;
                 plist.Add(foodGG);
                 
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        internal bool EatRand(Point foodRand)
+        {
+            Point Head = getNextPoint();
+            if (Head.IsHit(foodRand))
+            {
+                foodRand.sym = Head.sym;
+                plist.Add(foodRand);
 
                 return true;
             }

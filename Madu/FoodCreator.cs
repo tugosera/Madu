@@ -48,5 +48,15 @@ namespace Madu
             int y = random.Next(3, mapHeight - 2);
             return new Point(x, y, sym);
         }
+
+        public Point CreateFoodRand()
+        {
+            int x = random.Next(2, mapWidht - 2);
+            int y = random.Next(3, mapHeight - 2);
+            return new Point(x, y, sym);
+        }
     }
 }
+
+
+

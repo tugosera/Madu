@@ -14,7 +14,6 @@ namespace Madu
         {
             WaLLlist = new List<Figure>();
 
-
             horizontalLine upline = new horizontalLine(0, mapWidth - 2, 2, '-');
             horizontalLine downline = new horizontalLine(0, mapWidth - 2, mapHeight - 1, '-');
             VerticalLine leftline = new VerticalLine(2, mapHeight - 1, 0, '|');
