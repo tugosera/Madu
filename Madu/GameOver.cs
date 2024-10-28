@@ -27,7 +27,9 @@ namespace Madu
             Console.WriteLine("Time spent  - {0}", sw);
             Console.SetCursorPosition(30, 17);
             Console.Write("Score: {0}", snake.gool);
-            Console.ReadLine();
+            Console.SetCursorPosition(25, 21);
+            Console.Write("Press any key to save your results");
+            Console.ReadKey();
         }
 
     }

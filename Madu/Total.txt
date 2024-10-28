@@ -1,0 +1,3 @@
+﻿Erik Score = 42 Time is 00:03:02.9088549
+Artem Score = 8 Time is 00:00:30.4925139
+Anton Score = 16 Time is 00:01:00.5343490

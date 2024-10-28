@@ -6,19 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 
 namespace Madu
 {
     public class MainClass
     {
-
         static void Main(string[] args)
         {
+            Console.SetWindowSize(80, 45);
+
+            Login login = new Login();
+            login.login();
+            
+            Console.Clear();
+            Write write = new Write();
+            FindBest findBest = new FindBest();
+            Menu menu = new Menu();
+            menu.menu(write, findBest);
+
+ 
+            Console.Clear();
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            Console.SetWindowSize(80, 45);
             Walls walls = new Walls(80, 40);
             Console.ForegroundColor = ConsoleColor.Magenta;
             walls.Draw();
@@ -74,77 +86,83 @@ namespace Madu
             while (true)
             {
 
-                Random random = new Random();
-                int Rand1 = random.Next(1, 3);
+            Random random = new Random();
+            int Rand1 = random.Next(1, 3);
 
-                Console.SetCursorPosition(5, 1);
-                Console.Write("Score: {0}", snake.gool);
+            Console.SetCursorPosition(5, 1);
+            Console.Write("Score: {0}", snake.gool);
 
-                Console.SetCursorPosition(50, 1);
-                Console.Write("Time: {0}", sw);
+            Console.SetCursorPosition(50, 1);
+            Console.Write("Time: {0}", sw);
 
-                if (walls.IsHit(snake) || snake.IsHitTail())
+            if (walls.IsHit(snake) || snake.IsHitTail())
+            {
+                Console.Clear();
+                GameOver gameOver = new GameOver();
+                gameOver.GG(snake, sw);
+                write.write(login, snake, sw);
+                Console.ReadLine();
+                break;
+            }
+            if (snake.Eat(food))
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                food = foodCreator.CreateFood();
+                food.Draw();
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            if (snake.EatSpeed(foodSpeed))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                foodSpeed = foodCreatorSpeed.CreateFoodSpeed();
+                foodSpeed.Draw();
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            if (snake.EatSlow(foodSlow))
+            {
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                foodSlow = foodCreatorSlow.CreateFoodSlow();
+                foodSlow.Draw();
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            if (snake.EatGG(foodGG))
+            {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                GameOver gameOver = new GameOver();
+                gameOver.GG(snake, sw);
+                Console.ForegroundColor = ConsoleColor.White;
+                write.write(login, snake, sw);
+                Console.ReadLine();
+                break;
+            }
+            if (snake.EatRand(foodRand))
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                if (Rand1 == 1)
+                {
+                    snake.gool += 10;
+                }
+                else if (Rand1 == 2)
                 {
                     Console.Clear();
                     GameOver gameOver = new GameOver();
                     gameOver.GG(snake, sw);
+                    Console.ForegroundColor = ConsoleColor.White;
+                    write.write(login, snake, sw);
+                    Console.ReadLine();
                     break;
                 }
-                if(snake.Eat(food))
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    food = foodCreator.CreateFood();
-                    food.Draw();
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (snake.EatSpeed(foodSpeed))
-                {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    foodSpeed = foodCreatorSpeed.CreateFoodSpeed();
-                    foodSpeed.Draw();
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (snake.EatSlow(foodSlow))
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    foodSlow = foodCreatorSlow.CreateFoodSlow();
-                    foodSlow.Draw();
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (snake.EatGG(foodGG))
-                {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    GameOver gameOver = new GameOver();
-                    gameOver.GG(snake, sw);
-                    Console.ForegroundColor = ConsoleColor.White;
-                    break;
-                }
-                if (snake.EatRand(foodRand))
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    if (Rand1 == 1)
-                    {
-                        snake.gool += 10;
-                    }
-                    else if (Rand1 == 2)
-                    {
-                        Console.Clear();
-                        GameOver gameOver = new GameOver();
-                        gameOver.GG(snake, sw);
-                        Console.ForegroundColor = ConsoleColor.White;
-                        break;
-                    }
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo key = Console.ReadKey();
-                    snake.HandlKey(key.Key);
-                }
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Thread.Sleep(snake.speed);
-                snake.Move();
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo key = Console.ReadKey();
+                snake.HandlKey(key.Key);
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Thread.Sleep(snake.speed);
+            snake.Move();
             }
         }
     }
